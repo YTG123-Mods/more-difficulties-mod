@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "morediffs",
+  "version": "${version}",
+  "name": "More Difficulties Mod",
+  "description": "Adds more difficulties (heavily inspired/copied from Fundy) to Minecraft.",
+  "authors": [
+    "YTG123"
+  ],
+  "contact": {
+    "souces": "https://github.com/YTG1234/more-difficulties-mod.git"
+  },
+  "license": "MIT",
+  "icon": "assets/morediffs/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.ytg123.morediffs.CommonMain"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  },
+  "mixins": [
+    "morediffs.mixins.json"
+  ]
+}
