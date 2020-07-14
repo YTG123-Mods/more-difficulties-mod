@@ -3,7 +3,9 @@
     "package": "com.ytg123.morediffs.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+        "CraftingSrceenHandlerMixin",
         "EnderDragonFightMixin",
+        "LivingEntityMixin",
         "PlayerEntityMixin",
         "ServerPlayerInteractionManagerMixin",
         "ServerPlayNetworkHandlerMixin",

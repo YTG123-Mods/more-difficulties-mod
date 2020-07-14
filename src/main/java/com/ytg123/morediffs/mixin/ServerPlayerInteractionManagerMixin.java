@@ -37,8 +37,7 @@ public abstract class ServerPlayerInteractionManagerMixin {
             locals = LocalCapture.CAPTURE_FAILHARD,
             cancellable = true)
     private void breakBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir, BlockState state, BlockEntity entity, Block block) {
-        if(this.isCreative()) cir.setReturnValue(true);
-        if ((state.isOf(Blocks.STONE) || state.isOf(Blocks.ANDESITE) || state.isOf(Blocks.DIORITE) || state.isOf(Blocks.GRANITE)) && world.getDifficulty().equals(Utils.difficulty("BABY_MODE"))) {
+        if ((state.isOf(Blocks.STONE) || state.isOf(Blocks.ANDESITE) || state.isOf(Blocks.DIORITE) || state.isOf(Blocks.GRANITE)) && world.getDifficulty().equals(Utils.difficulty("BABY_MODE")) && !isCreative()) {
             Random r = new Random();
             double num = r.nextDouble();
             if (num < 0.25D) {
