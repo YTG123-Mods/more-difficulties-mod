@@ -7,5 +7,11 @@ pluginManagement {
         }
         gradlePluginPortal()
         maven { url = 'https://jitpack.io' }
+        maven {
+            url = "https://www.cursemaven.com"
+        }
+        flatDir {
+            dirs 'libs'
+        }
     }
 }

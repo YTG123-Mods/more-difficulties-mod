@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EnderDragonFight.class)
-public class EnderDragonFightMixin {
+public abstract class EnderDragonFightMixin {
     @Shadow @Final private ServerWorld world;
 
     @Inject(method = "createDragon()Lnet/minecraft/entity/boss/dragon/EnderDragonEntity;", at = @At("INVOKE"))

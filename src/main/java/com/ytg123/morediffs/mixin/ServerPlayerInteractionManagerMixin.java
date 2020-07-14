@@ -22,19 +22,22 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.Random;
 
 @Mixin(ServerPlayerInteractionManager.class)
-public class ServerPlayerInteractionManagerMixin {
+public abstract class ServerPlayerInteractionManagerMixin {
     @Shadow
     public ServerPlayerEntity player;
 
     @Shadow
     public ServerWorld world;
 
-    @Inject(method = "tryBreakBlock",
+    @Shadow public abstract boolean isCreative();
+
+    @Inject(method = "tryBreakBlock(Lnet/minecraft/util/math/BlockPos;)Z",
             at = @At(value = "INVOKE",
                      target = "Lnet/minecraft/block/Block;onBreak(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;)V"),
             locals = LocalCapture.CAPTURE_FAILHARD,
             cancellable = true)
     private void breakBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir, BlockState state, BlockEntity entity, Block block) {
+        if(this.isCreative()) cir.setReturnValue(true);
         if ((state.isOf(Blocks.STONE) || state.isOf(Blocks.ANDESITE) || state.isOf(Blocks.DIORITE) || state.isOf(Blocks.GRANITE)) && world.getDifficulty().equals(Utils.difficulty("BABY_MODE"))) {
             Random r = new Random();
             double num = r.nextDouble();

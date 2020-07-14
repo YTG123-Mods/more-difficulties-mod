@@ -1,17 +1,17 @@
 {
-  "required": true,
-  "package": "com.ytg123.morediffs.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "mixins": [
-    "PlayerEntityMixin",
-    "ServerPlayNetworkHandlerMixin",
-    "ServerWorldMixin",
-    "EnderDragonFightMixin",
-    "ServerPlayerInteractionManagerMixin"
-  ],
-  "client": [],
-  "server": [],
-  "injectors": {
-    "defaultRequire": 1
-  }
+    "required": true,
+    "package": "com.ytg123.morediffs.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "EnderDragonFightMixin",
+        "PlayerEntityMixin",
+        "ServerPlayerInteractionManagerMixin",
+        "ServerPlayNetworkHandlerMixin",
+        "ServerWorldMixin"
+    ],
+    "client": [],
+    "server": [],
+    "injectors": {
+        "defaultRequire": 1
+    }
 }
