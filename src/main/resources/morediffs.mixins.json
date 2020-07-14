@@ -2,7 +2,9 @@
   "required": true,
   "package": "com.ytg123.morediffs.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [],
+  "mixins": [
+    "PlayerEntityMixin"
+  ],
   "client": [],
   "server": [],
   "injectors": {

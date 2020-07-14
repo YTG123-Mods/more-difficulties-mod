@@ -16,6 +16,9 @@
   "entrypoints": {
     "main": [
       "com.ytg123.morediffs.CommonMain"
+    ],
+    "mm:early_risers": [
+      "com.ytg123.morediffs.EarlyRiser"
     ]
   },
   "depends": {

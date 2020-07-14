@@ -1,11 +1,8 @@
 package com.ytg123.morediffs;
 
-import com.chocohead.mm.api.ClassTinkerers;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.Difficulty;
-import org.apache.commons.lang3.builder.Diff;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,17 +24,6 @@ public class CommonMain implements ModInitializer, ServerLifecycleEvents.ServerS
         log(Level.INFO, "Initializing");
 
         ServerLifecycleEvents.SERVER_STARTED.register(this);
-
-        ClassTinkerers.enumBuilder("net.minecraft.world.Difficulty", int.class, String.class)
-                .addEnum("IMPOSSIBLE", 4, "impossible")
-                .addEnum("IMPOSSIBLE_PLUS_PLUS", 5, "impossible_plus_plus")
-                .addEnum("NIGHTMARE", 6, "nightmare");
-
-        try {
-            log(Level.ALL, Difficulty.class.getField("IMPOSSIBLE").get(null).toString());
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
 
         //TODO: Initializer
     }
