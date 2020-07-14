@@ -1,6 +1,11 @@
 {
     "options.difficulty.impossible": "Impossible",
-    "options.difficulty.impossible_plus_plus": "Impossible++",
+    "options.difficulty.impossible++": "Impossible++",
     "options.difficulty.nightmare": "Nightmare",
-    "options.difficulty.baby_mode": "Baby Mode"
+    "options.difficulty.baby": "Baby Mode",
+
+    "text.morediffs.wither": "Wither",
+    "text.morediffs.wither_message": "I will destroy you",
+    "text.morediffs.end": "Dragon",
+    "text.morediffs.end_message": "I will destroy you"
 }

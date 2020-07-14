@@ -1,6 +1,7 @@
 package com.ytg123.morediffs.mixin;
 
 import com.chocohead.mm.api.ClassTinkerers;
+import com.ytg123.morediffs.Utils;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -28,15 +29,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     /**
-     * A method that gets a difficulty from the difficulty enum.
-     * @param diff The difficulty String to get.
-     * @return A {@code Difficulty} object representing the difficulty.
-     */
-    private Difficulty difficulty(String diff) {
-        return ClassTinkerers.getEnum(Difficulty.class, diff);
-    }
-
-    /**
      * A method that Injects into PlayerEntity$damage. {@see Inject}
      * @param source {@see PlayerEntity$damage}
      * @param amount {@see PlayerEntity$damage}
@@ -45,9 +37,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", cancellable = true, at = @At("RETURN"))
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (source.isScaledWithDifficulty()) {
-            if (this.world.getDifficulty().equals(difficulty("IMPOSSIBLE")) || this.world.getDifficulty().equals(difficulty("IMPOSSIBLE_PLUS_PLUS")) || this.world.getDifficulty().equals(difficulty("NIGHTMARE"))) {
+            if (this.world.getDifficulty().equals(Utils.difficulty("IMPOSSIBLE")) || this.world.getDifficulty().equals(Utils.difficulty("IMPOSSIBLE_PLUS_PLUS")) || this.world.getDifficulty().equals(Utils.difficulty("NIGHTMARE"))) {
                 cir.setReturnValue(amount == 0.0f ? false : super.damage(source, amount * 3.0F / 2.0F));
-            } else if (this.world.getDifficulty().equals(difficulty("BABY_MODE"))) {
+            } else if (this.world.getDifficulty().equals(Utils.difficulty("BABY_MODE"))) {
                 cir.setReturnValue(false);
             }
         }
