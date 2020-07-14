@@ -1,5 +1,6 @@
 {
     "options.difficulty.impossible": "Impossible",
     "options.difficulty.impossible_plus_plus": "Impossible++",
-    "options.difficulty.nightmare": "Nightmare"
+    "options.difficulty.nightmare": "Nightmare",
+    "options.difficulty.baby_mode": "Baby Mode"
 }
