@@ -6,7 +6,7 @@ Download and install the [Fabric Mod Loader](https://fabricmc.net/use), head to 
 <br />
 Also download [Fabric API](https://curseforge.com/minecraft/mc-mods/fabric-api) and [Fabric ASM](https://github.com/Chocohead/Fabric-ASM/releases/latest) (In the future you will not need Fabric ASM but for now you need it.)
 
-Put is in your `mods` folder inside your Minecraft instance directory:<br />
+Put all the jars in your `mods` folder inside your Minecraft instance directory:<br />
 Windows: `%appdata%/.minecraft`<br />
 macOS: `~/Library/Application Support/minecraft`<br />
 Linux: `~/.minecraft`
