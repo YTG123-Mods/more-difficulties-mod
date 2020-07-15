@@ -1,0 +1,19 @@
+{
+    "required": true,
+    "package": "com.ytg123.morediffs.mixin.baby",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "CraftingSrceenHandlerMixin",
+        "EnderDragonFightMixin",
+        "LivingEntityMixin",
+        "PlayerEntityMixin",
+        "ServerPlayerInteractionManagerMixin",
+        "ServerPlayNetworkHandlerMixin",
+        "ServerWorldMixin"
+    ],
+    "client": [],
+    "server": [],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

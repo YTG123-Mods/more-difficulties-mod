@@ -27,6 +27,8 @@
     "mm": ">=2.0"
   },
   "mixins": [
+    "morediffs.baby.mixins.json",
+    "morediffs.impossible.mixins.json",
     "morediffs.mixins.json"
   ]
 }

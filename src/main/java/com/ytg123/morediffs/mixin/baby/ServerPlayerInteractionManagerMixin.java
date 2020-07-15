@@ -1,4 +1,4 @@
-package com.ytg123.morediffs.mixin;
+package com.ytg123.morediffs.mixin.baby;
 
 import com.ytg123.morediffs.Utils;
 import net.minecraft.block.Block;

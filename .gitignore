@@ -22,3 +22,9 @@ run/
 
 #Yeoman
 .yo-rc.json
+
+#Stuff
+ListenerAll.class
+ListenerAll$1.class
+ListenerAll$2.class
+ListenerAll$3.class
