@@ -1,5 +1,6 @@
 package com.ytg123.morediffs.mixin;
 
+import com.ytg123.morediffs.Utils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -23,15 +24,17 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "drop(Lnet/minecraft/entity/damage/DamageSource;)V", at = @At("HEAD"), cancellable = true)
     public void drop(DamageSource source, CallbackInfo ci) {
-        if ((Object) this instanceof EndermanEntity) {
-            dropStack(new ItemStack(Items.ENDER_PEARL, 2));
-            ci.cancel();
-        } else if ((Object) this instanceof WitherSkeletonEntity) {
-            dropStack(new ItemStack(Items.WITHER_SKELETON_SKULL, 1));
-            ci.cancel();
-        } else if ((Object) this instanceof BlazeEntity) {
-            dropStack(new ItemStack(Items.BLAZE_ROD, 12));
-            ci.cancel();
+        if (world.getDifficulty().equals(Utils.difficulty("BABY_MODE"))) {
+            if ((Object) this instanceof EndermanEntity) {
+                dropStack(new ItemStack(Items.ENDER_PEARL, 2));
+                ci.cancel();
+            } else if ((Object) this instanceof WitherSkeletonEntity) {
+                dropStack(new ItemStack(Items.WITHER_SKELETON_SKULL, 1));
+                ci.cancel();
+            } else if ((Object) this instanceof BlazeEntity) {
+                dropStack(new ItemStack(Items.BLAZE_ROD, 12));
+                ci.cancel();
+            }
         }
     }
 }

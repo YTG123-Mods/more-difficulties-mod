@@ -50,28 +50,30 @@ public abstract class PlayerEntityMixin extends LivingEntity {
      */
     @Inject(method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", cancellable = true, at = @At("RETURN"))
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (source.equals(DamageSource.LAVA)) {
-            amount = 0.0F;
-            if (world.getBlockState(getBlockPos()).isOf(Blocks.LAVA)) {
-                if (world.getBlockState(getBlockPos()).getFluidState().getLevel() == 0) {
-                    world.setBlockState(getBlockPos(), Blocks.OBSIDIAN.getDefaultState());
-                } else {
-                    world.setBlockState(getBlockPos(), Blocks.COBBLESTONE.getDefaultState());
+        if (world.getDifficulty().equals(Utils.difficulty("BABY_MODE"))) {
+            if (source.equals(DamageSource.LAVA)) {
+                amount = 0.0F;
+                if (world.getBlockState(getBlockPos()).isOf(Blocks.LAVA)) {
+                    if (world.getBlockState(getBlockPos()).getFluidState().getLevel() == 0) {
+                        world.setBlockState(getBlockPos(), Blocks.OBSIDIAN.getDefaultState());
+                    } else {
+                        world.setBlockState(getBlockPos(), Blocks.COBBLESTONE.getDefaultState());
+                    }
                 }
+            } else if (source.equals(DamageSource.IN_FIRE)) {
+                amount = 0.0F;
+                if (world.getBlockState(getBlockPos()).isOf(Blocks.FIRE)) {
+                    world.setBlockState(getBlockPos(), Blocks.AIR.getDefaultState());
+                }
+            } else if (source.equals(DamageSource.ON_FIRE)) {
+                amount = 0.0F;
+                this.setFireTicks(0);
+            } else if (source.equals(DamageSource.FALL)) {
+                amount /= 20.0F;
+            } else if (source.equals(DamageSource.CRAMMING) || source.equals(DamageSource.HOT_FLOOR) || source.equals(DamageSource.STARVE)) {
+                amount = 0.0F;
+                cir.setReturnValue(false);
             }
-        } else if (source.equals(DamageSource.IN_FIRE)) {
-            amount = 0.0F;
-            if (world.getBlockState(getBlockPos()).isOf(Blocks.FIRE)) {
-                world.setBlockState(getBlockPos(), Blocks.AIR.getDefaultState());
-            }
-        } else if (source.equals(DamageSource.ON_FIRE)) {
-            amount = 0.0F;
-            this.setFireTicks(0);
-        } else if (source.equals(DamageSource.FALL)) {
-            amount /= 20.0F;
-        } else if (source.equals(DamageSource.CRAMMING) || source.equals(DamageSource.HOT_FLOOR) || source.equals(DamageSource.STARVE)) {
-            amount = 0.0F;
-            cir.setReturnValue(false);
         }
 
         if (source.isScaledWithDifficulty()) {
@@ -86,7 +88,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(method = "tick()V", at = @At("HEAD"))
     public void tick(CallbackInfo ci) {
-        if (!world.isClient) {
+        if (!world.isClient && world.getDifficulty().equals(Utils.difficulty("BABY_MODE"))) {
             List<Entity> entities = ((ServerWorld) world).getEntities(null, (entity) -> {
                 class FloatRange extends NumberRange<Float> {
                     private final Double squaredMin;
@@ -114,7 +116,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             });
             for (Entity entity : entities) {
                 if (entity instanceof HostileEntity) {
-                    ((HostileEntity)entity).damage(DamageSource.mob(this), Float.MAX_VALUE);
+                    ((HostileEntity) entity).damage(DamageSource.mob(this), Float.MAX_VALUE);
                 }
             }
         }
