@@ -5,13 +5,16 @@
     "mixins": [
         "CraftingSrceenHandlerMixin",
         "EnderDragonFightMixin",
+        "EntityMixin",
         "LivingEntityMixin",
         "PlayerEntityMixin",
         "ServerPlayerInteractionManagerMixin",
         "ServerPlayNetworkHandlerMixin",
         "ServerWorldMixin"
     ],
-    "client": [],
+    "client": [
+        "ClientPlayerEntityMixin"
+    ],
     "server": [],
     "injectors": {
         "defaultRequire": 1

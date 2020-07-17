@@ -7,5 +7,8 @@
     "text.morediffs.wither": "Wither",
     "text.morediffs.wither_message": "I will destroy you",
     "text.morediffs.end": "Dragon",
-    "text.morediffs.end_message": "I will destroy you"
+    "text.morediffs.end_message": "I will destroy you",
+    "text.morediffs.god": "God",
+    "text.morediffs.water_message": "I see you're trying to swim, here's a boat instead.",
+    "text.morediffs.mob_scared": "Nope"
 }

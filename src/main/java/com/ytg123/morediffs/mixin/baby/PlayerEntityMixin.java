@@ -8,9 +8,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.MessageType;
 import net.minecraft.predicate.NumberRange;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -108,6 +112,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             for (Entity entity : entities) {
                 if (entity instanceof HostileEntity) {
                     ((HostileEntity) entity).damage(DamageSource.mob(this), Float.MAX_VALUE);
+                    getServer().getPlayerManager().broadcastChatMessage(new TranslatableText("chat.type.text", new TranslatableText("entity."+
+                                                                                                                                            Registry.ENTITY_TYPE.getId(entity.getType()).getNamespace() + "." + Registry.ENTITY_TYPE.getId(entity.getType()).getPath()), new TranslatableText("text.morediffs.mob_scared")), MessageType.CHAT, Util.NIL_UUID);
                 }
             }
         }

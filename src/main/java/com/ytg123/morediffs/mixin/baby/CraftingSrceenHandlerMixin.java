@@ -27,7 +27,7 @@ public abstract class CraftingSrceenHandlerMixin {
                 itemStack.addEnchantment(Enchantments.UNBREAKING, 3);
             }
             if (Enchantments.PROTECTION.isAcceptableItem(itemStack)) {
-                itemStack.addEnchantment(Enchantments.PROTECTION, 4);
+                itemStack.addEnchantment(Enchantments.PROTECTION, 3);
             }
             if (Enchantments.MENDING.isAcceptableItem(itemStack)) {
                 itemStack.addEnchantment(Enchantments.MENDING, 1);

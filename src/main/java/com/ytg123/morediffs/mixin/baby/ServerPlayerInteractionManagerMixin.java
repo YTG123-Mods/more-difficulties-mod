@@ -12,6 +12,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -43,17 +44,17 @@ public abstract class ServerPlayerInteractionManagerMixin {
             if (num < 0.25D) {
                 num *= 4.0D;
                 if (num < 0.3D) {
-                    dropItem(new ItemStack(Items.COAL, 1 + r.nextInt(2)), player);
+                    dropItem(new ItemStack(Items.COAL, 1 + r.nextInt(2)), player.getServerWorld(), pos);
                 } else if (num < 0.5D) {
-                    dropItem(new ItemStack(Items.IRON_ORE), player);
+                    dropItem(new ItemStack(Items.IRON_ORE), player.getServerWorld(), pos);
                 } else if (num < 0.65D) {
-                    dropItem(new ItemStack(Items.LAPIS_LAZULI, 2 + r.nextInt(9)), player);
+                    dropItem(new ItemStack(Items.LAPIS_LAZULI, 2 + r.nextInt(9)), player.getServerWorld(), pos);
                 } else if (num < 0.8D) {
-                    dropItem(new ItemStack(Items.REDSTONE, 2 + r.nextInt(5)), player);
+                    dropItem(new ItemStack(Items.REDSTONE, 2 + r.nextInt(5)), player.getServerWorld(), pos);
                 } else if (num < 0.9D) {
-                    dropItem(new ItemStack(Items.EMERALD), player);
+                    dropItem(new ItemStack(Items.EMERALD), player.getServerWorld(), pos);
                 } else if (num < 1.0D) {
-                    dropItem(new ItemStack(Items.DIAMOND), player);
+                    dropItem(new ItemStack(Items.DIAMOND), player.getServerWorld(), pos);
                 }
 
 
@@ -61,12 +62,9 @@ public abstract class ServerPlayerInteractionManagerMixin {
         }
     }
 
-    private void dropItem(ItemStack stack, ServerPlayerEntity player) {
+    private void dropItem(ItemStack stack, World world, BlockPos pos) {
         ItemEntity itemEntity;
-        itemEntity = player.dropItem(stack, false);
-        if (itemEntity != null) {
-            itemEntity.resetPickupDelay();
-            itemEntity.setOwner(player.getUuid());
-        }
+        itemEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+        world.spawnEntity(itemEntity);
     }
 }
