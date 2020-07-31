@@ -10,5 +10,12 @@
     "text.morediffs.end_message": "I will destroy you",
     "text.morediffs.god": "God",
     "text.morediffs.water_message": "I see you're trying to swim, here's a boat instead.",
-    "text.morediffs.mob_scared": "Nope"
+    "text.morediffs.mob_scared": "Nope",
+    "text.morediffs.trip.0": "You tripped on a twig",
+    "text.morediffs.trip.1": "You slipped on moss",
+    "text.morediffs.trip.2": "You tripped on a rock",
+    "text.morediffs.trip.3": "You didn't notice you broke your leg",
+    "text.morediffs.fundy": "Fundy",
+    "text.morediffs.nottired": "You don't feel tired yet.",
+    "text.morediffs.hungry": "You feel well rested, but hungry."
 }

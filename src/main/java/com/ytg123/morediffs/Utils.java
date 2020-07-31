@@ -12,4 +12,7 @@ public abstract class Utils {
     public static Difficulty difficulty(String diff) {
         return ClassTinkerers.getEnum(Difficulty.class, diff);
     }
+
+    public static long bedTimePrevention = -1L;
+    public static long bedTime = 0L;
 }

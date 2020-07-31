@@ -24,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A mixin for {@code PlayerEntity}.
@@ -84,35 +85,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "tick()V", at = @At("HEAD"))
     public void tick(CallbackInfo ci) {
         if (!world.isClient && world.getDifficulty().equals(Utils.difficulty("BABY_MODE"))) {
-            List<Entity> entities = ((ServerWorld) world).getEntities(null, (entity) -> {
-                class FloatRange extends NumberRange<Float> {
-                    private final Double squaredMin;
-                    private final Double squaredMax;
-
-                    public FloatRange(Float min, Float max) {
-                        super(min, max);
-                        this.squaredMin = square(min);
-                        this.squaredMax = square(max);
-                    }
-
-                    public Double square(Float value) {
-                        return value == null ? null : value.doubleValue() * value.doubleValue();
-                    }
-
-                    public boolean testSqrt(double value) {
-                        if (this.squaredMin != null && this.squaredMin > value) {
-                            return false;
-                        } else {
-                            return this.squaredMax == null || this.squaredMax >= value;
-                        }
-                    }
-                }
-                return new FloatRange(0.0F, 3.0F).testSqrt(entity.squaredDistanceTo(new Vec3d(getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ())));
-            });
+            List<Entity> entities = ((ServerWorld) world).getEntities(null, (entity) -> new NumberRange.FloatRange(0.0F, 3.0F).testSqrt(entity.squaredDistanceTo(new Vec3d(getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ()))));
             for (Entity entity : entities) {
                 if (entity instanceof HostileEntity) {
-                    ((HostileEntity) entity).damage(DamageSource.mob(this), Float.MAX_VALUE);
-                    getServer().getPlayerManager().broadcastChatMessage(new TranslatableText("chat.type.text", new TranslatableText("entity."+
+                    entity.damage(DamageSource.mob(this), Float.MAX_VALUE);
+                    Objects.requireNonNull(getServer()).getPlayerManager().broadcastChatMessage(new TranslatableText("chat.type.text", new TranslatableText("entity."+
                                                                                                                                             Registry.ENTITY_TYPE.getId(entity.getType()).getNamespace() + "." + Registry.ENTITY_TYPE.getId(entity.getType()).getPath()), new TranslatableText("text.morediffs.mob_scared")), MessageType.CHAT, Util.NIL_UUID);
                 }
             }

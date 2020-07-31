@@ -39,7 +39,7 @@ public abstract class ServerPlayerInteractionManagerMixin {
             cancellable = true)
     private void breakBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir, BlockState state, BlockEntity entity, Block block) {
         if ((state.isOf(Blocks.STONE) || state.isOf(Blocks.ANDESITE) || state.isOf(Blocks.DIORITE) || state.isOf(Blocks.GRANITE)) && world.getDifficulty().equals(Utils.difficulty("BABY_MODE")) && !isCreative()) {
-            Random r = new Random();
+            Random r = world.getRandom();
             double num = r.nextDouble();
             if (num < 0.25D) {
                 num *= 4.0D;

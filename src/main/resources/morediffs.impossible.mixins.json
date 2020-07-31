@@ -2,7 +2,13 @@
     "required": true,
     "package": "com.ytg123.morediffs.mixin.impossible",
     "compatibilityLevel": "JAVA_8",
-    "mixins": ["BlockItemMixin", "ItemStackMixin", "PlayerEntityMixin"],
+    "mixins": [
+        "AbstractSkeletonEntityMixin",
+        "BlockItemMixin",
+        "ItemStackMixin",
+        "PlayerEntityMixin",
+        "ServerPlayNetworkHandlerMixin", "ServerWorldMixin"
+    ],
     "client": [],
     "server": [],
     "injectors": {

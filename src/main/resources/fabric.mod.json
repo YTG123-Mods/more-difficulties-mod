@@ -29,6 +29,8 @@
   "mixins": [
     "morediffs.baby.mixins.json",
     "morediffs.impossible.mixins.json",
-    "morediffs.mixins.json"
-  ]
+    "morediffs.mixins.json",
+    "morediffs.impossibleplusplus.mixins.json"
+  ],
+  "accessWidener": "morediffs.accesswidener"
 }
