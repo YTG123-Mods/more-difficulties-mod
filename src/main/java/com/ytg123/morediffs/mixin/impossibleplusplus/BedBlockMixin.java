@@ -33,6 +33,7 @@ public abstract class BedBlockMixin extends HorizontalFacingBlock {
     public void beforePlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack, CallbackInfo ci) {
         if (placer instanceof PlayerEntity && !world.isClient()) {
             if (!world.getDimension().isBedWorking() && !((PlayerEntity)placer).isCreative() && !((PlayerEntity)placer).isSpectator() && (world.getDifficulty().equals(Utils.difficulty("IMPOSSIBLE_PLUS_PLUS")) || world.getDifficulty().equals(Utils.difficulty("NIGHTMARE")))) {
+                Objects.requireNonNull(world.getServer()).getPlayerManager().broadcastChatMessage(new TranslatableText("chat.type.text", new TranslatableText("text.morediffs.fundy"), new TranslatableText("text.morediffs.bed")), MessageType.CHAT, Util.NIL_UUID);
                 ci.cancel();
             }
         }
@@ -41,11 +42,14 @@ public abstract class BedBlockMixin extends HorizontalFacingBlock {
     @Inject(method = "onUse(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/util/hit/BlockHitResult;)Lnet/minecraft/util/ActionResult;", at = @At("HEAD"), cancellable = true)
     public void beforeSleep(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         if (!player.isCreative() && !player.isSpectator() && !world.isClient()) {
-            long currentTime = world.getTime();
+            System.out.println("Before sleep");
+            System.out.println(Utils.bedTimePrevention);
+            long currentTime = world.getTimeOfDay();
             if (currentTime > Utils.bedTimePrevention) {
                 Utils.bedTime = world.getTime();
                 Utils.bedTimePrevention = -1L;
             } else {
+                System.out.println("Preventing Sleep");
                 Objects.requireNonNull(world.getServer()).getPlayerManager().broadcastChatMessage(new TranslatableText("chat.type.text", new TranslatableText("text.morediffs.fundy"), new TranslatableText("text.morediffs.nottired")), MessageType.CHAT, Util.NIL_UUID);
                 cir.setReturnValue(ActionResult.SUCCESS);
             }

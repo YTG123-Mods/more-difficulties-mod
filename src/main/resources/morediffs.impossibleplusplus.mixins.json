@@ -2,9 +2,7 @@
     "required": true,
     "package": "com.ytg123.morediffs.mixin.impossibleplusplus",
     "compatibilityLevel": "JAVA_8",
-    "mixins": [
-        "BedBlockMixin", "PlayerEntityMixin"
-    ],
+    "mixins": ["AbstractBlockMixin", "BedBlockMixin", "HungerManagerAccessor", "PlayerEntityMixin"],
     "client": [],
     "server": [],
     "injectors": {

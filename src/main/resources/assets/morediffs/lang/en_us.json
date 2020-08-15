@@ -17,5 +17,7 @@
     "text.morediffs.trip.3": "You didn't notice you broke your leg",
     "text.morediffs.fundy": "Fundy",
     "text.morediffs.nottired": "You don't feel tired yet.",
-    "text.morediffs.hungry": "You feel well rested, but hungry."
+    "text.morediffs.hungry": "You feel well rested, but hungry.",
+    "text.morediffs.tools": "I need to make some tools",
+    "text.morediffs.bed": "You can't sleep here, you fool!"
 }
