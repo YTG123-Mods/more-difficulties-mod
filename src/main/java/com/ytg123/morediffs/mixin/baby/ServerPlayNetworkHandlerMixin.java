@@ -3,12 +3,10 @@ package com.ytg123.morediffs.mixin.baby;
 import com.ytg123.morediffs.Utils;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementProgress;
-import net.minecraft.command.arguments.IdentifierArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
@@ -62,12 +60,12 @@ public abstract class ServerPlayNetworkHandlerMixin {
                     }
                 }
             } else if (msg.contains("no u")) {
-                for (Entity entity : player.getServerWorld().getEntities(null, (Entity entity) -> entity instanceof WitherEntity)) {
+                for (Entity entity : player.getServerWorld().getEntitiesByType(null, (Entity entity) -> entity instanceof WitherEntity)) {
                     if (entity instanceof WitherEntity) {
                         entity.kill();
                     }
                 }
-                for (Entity entity : player.getServerWorld().getEntities(null, (Entity entity) -> entity instanceof EnderDragonEntity)) {
+                for (Entity entity : player.getServerWorld().getEntitiesByType(null, (Entity entity) -> entity instanceof EnderDragonEntity)) {
                     entity.kill();
                     Advancement advancement = server.getAdvancementLoader().get(new Identifier("minecraft", "end/kill_dragon"));
                     AdvancementProgress advancementProgress = player.getAdvancementTracker().getProgress(advancement);

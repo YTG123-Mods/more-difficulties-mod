@@ -85,7 +85,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "tick()V", at = @At("HEAD"))
     public void tick(CallbackInfo ci) {
         if (!world.isClient && world.getDifficulty().equals(Utils.difficulty("BABY_MODE"))) {
-            List<Entity> entities = ((ServerWorld) world).getEntities(null, (entity) -> new NumberRange.FloatRange(0.0F, 3.0F).testSqrt(entity.squaredDistanceTo(new Vec3d(getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ()))));
+            List<Entity> entities = ((ServerWorld) world).getEntitiesByType(null, (entity) -> new NumberRange.FloatRange(0.0F, 3.0F).testSqrt(entity.squaredDistanceTo(new Vec3d(getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ()))));
             for (Entity entity : entities) {
                 if (entity instanceof HostileEntity) {
                     entity.damage(DamageSource.mob(this), Float.MAX_VALUE);

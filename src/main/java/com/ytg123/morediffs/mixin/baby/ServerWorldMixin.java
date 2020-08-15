@@ -23,11 +23,11 @@ import java.util.function.Supplier;
 
 @Mixin(ServerWorld.class)
 public abstract class ServerWorldMixin extends World {
-    @Shadow public abstract MinecraftServer getServer();
-
-    protected ServerWorldMixin(MutableWorldProperties mutableWorldProperties, RegistryKey<World> registryKey, RegistryKey<DimensionType> registryKey2, DimensionType dimensionType, Supplier<Profiler> profiler, boolean bl, boolean bl2, long l) {
-        super(mutableWorldProperties, registryKey, registryKey2, dimensionType, profiler, bl, bl2, l);
+    protected ServerWorldMixin(MutableWorldProperties properties, RegistryKey<World> registryKey, DimensionType dimensionType, Supplier<Profiler> supplier, boolean bl, boolean bl2, long l) {
+        super(properties, registryKey, dimensionType, supplier, bl, bl2, l);
     }
+
+    @Shadow public abstract MinecraftServer getServer();
 
     @Inject(method = "spawnEntity(Lnet/minecraft/entity/Entity;)Z", at = @At(value = "INVOKE"))
     public void spawnEntity(Entity entity, CallbackInfoReturnable<Boolean> cir) {
