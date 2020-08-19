@@ -26,19 +26,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * A mixin for {@code PlayerEntity}.
- *
- * @author YTG1234
- */
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
-    /**
-     * A useless constructor the should not be used anywhere.
-     *
-     * @param entityType {@see LivingEntity#LivingEntity}
-     * @param world      {@see LivingEntity#LivingEntity}
-     */
     private PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -46,13 +35,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Shadow
     public abstract void setFireTicks(int ticks);
 
-    /**
-     * A method that Injects into PlayerEntity$damage. {@see Inject}
-     *
-     * @param source {@see PlayerEntity$damage}
-     * @param amount {@see PlayerEntity$damage}
-     * @param cir    {@see Inject}
-     */
     @Inject(method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", cancellable = true, at = @At("RETURN"))
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (world.getDifficulty().equals(Utils.difficulty("BABY_MODE"))) {
