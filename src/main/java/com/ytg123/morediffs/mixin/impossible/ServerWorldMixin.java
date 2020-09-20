@@ -47,7 +47,7 @@ public abstract class ServerWorldMixin extends World {
                 if (entity.getType().equals(EntityType.ZOMBIE)) {
                     hostileEntity.setBaby(true);
                 }
-                hostileEntity.equip(EquipmentSlot.HEAD.getEntitySlotId(), new ItemStack(Items.OAK_BUTTON, 1));
+                hostileEntity.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.OAK_BUTTON, 1));
                 hostileEntity.setEquipmentDropChance(EquipmentSlot.HEAD, 0);
                 hostileEntity.setEquipmentDropChance(EquipmentSlot.CHEST, 0);
                 hostileEntity.setEquipmentDropChance(EquipmentSlot.LEGS, 0);

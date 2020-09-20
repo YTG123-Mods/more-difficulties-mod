@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class AbstractBlockMixin {
     @Inject(method = "onBlockBreakStart(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/player/PlayerEntity;)V", at = @At(value = "RETURN"))
     public void onBlockBreakStartEnds(BlockState state, World world, BlockPos pos, PlayerEntity player, CallbackInfo ci) {
-        if (!world.isClient()) {
+        if (!world.isClient() && (world.getDifficulty().equals(Utils.difficulty("IMPOSSIBLE_PLUS_PLUS")) || world.getDifficulty().equals(Utils.difficulty("NIGHTMARE")))) {
             if ((Registry.BLOCK.getId(state.getBlock())
                     .getPath()
                     .contains("log") || Registry.BLOCK.getId(state.getBlock())

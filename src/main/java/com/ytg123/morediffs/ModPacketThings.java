@@ -15,7 +15,7 @@ public abstract class ModPacketThings {
                 // Execute on the main thread
                 if (
                         !packetContext.getPlayer().isCreative() &&
-                                !packetContext.getPlayer().isSpectator())
+                                !packetContext.getPlayer().isSpectator() && packetContext.getPlayer().world.canSetBlock(pos))
                     packetContext.getPlayer().world.breakBlock(pos, true, packetContext.getPlayer());
             });
         });
