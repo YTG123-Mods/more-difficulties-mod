@@ -1,6 +1,10 @@
 # More Difficulties Mod
 Adds new difficulties to Minecraft!
 
+
+...
+
+
 ## Installing
 Download and install the [Fabric Mod Loader](https://fabricmc.net/use), head to the [Latest Release](https://github.com/YTG1234/more-difficulties-mod/releases/latest) and download the jar file.
 <br />
